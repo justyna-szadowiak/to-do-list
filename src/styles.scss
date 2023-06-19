@@ -6,6 +6,10 @@ body {
   background: linear-gradient(to left, #ff2424, #9870f5);
 }
 
+.mat-body, .mat-body-2, .mat-typography .mat-body, .mat-typography .mat-body-2, .mat-typography {
+  font-size: 1rem;
+}
+
 .mat-button.mat-accent,
 .mat-icon-button.mat-accent,
 .mat-stroked-button.mat-accent {

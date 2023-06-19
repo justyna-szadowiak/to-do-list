@@ -8,7 +8,6 @@
               <mat-label>Task name</mat-label>
               <input formControlName="item" matInput placeholder="Placeholder">
               <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-              <mat-hint>add task</mat-hint>
             </mat-form-field>
             <button *ngIf="!isEditEnable" mat-raised-button color="primary" class="btn-add-task" (click)="addTask()">Add</button>
             <button *ngIf="isEditEnable" mat-raised-button color="primary" class="btn-update-task" (click)="updateTask()">Update</button>
@@ -20,7 +19,7 @@
       <div cdkDropListGroup>
         <div class="row">
           <div class="col-md-4 container">
-            <h2 class="header-title" style="text-transform: uppercase;">To do<span *ngIf="tasks.length > 0"> - {{tasks.length}}</span></h2>
+            <h2 class="header-title" style="text-transform: uppercase;">To do<span *ngIf="tasks.length > 0"> ({{tasks.length}})</span></h2>
             <div
               cdkDropList
               [cdkDropListData]="tasks"
@@ -35,7 +34,7 @@
             </div>
           </div>
           <div class="col-md-4 container">
-            <h2 class="header-title" style="text-transform: uppercase;">In progress<span *ngIf="inProgress.length > 0"> - {{inProgress.length}}</span></h2>
+            <h2 class="header-title" style="text-transform: uppercase;">In progress<span *ngIf="inProgress.length > 0"> ({{inProgress.length}})</span></h2>
             <div
               cdkDropList
               [cdkDropListData]="inProgress"
@@ -49,7 +48,7 @@
             </div>
           </div>
           <div class="col-md-4 container">
-            <h2 class="header-title" style="text-transform: uppercase;">Done<span *ngIf="done.length > 0"> - {{done.length}}</span></h2>
+            <h2 class="header-title" style="text-transform: uppercase;">Done<span *ngIf="done.length > 0"> ({{done.length}})</span></h2>
             <div
               cdkDropList
               [cdkDropListData]="done"

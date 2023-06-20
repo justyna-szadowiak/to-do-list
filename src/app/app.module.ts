@@ -15,13 +15,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TodoComponent } from './todo/todo.component';
 import { TaskComponent } from './task/task.component';
+import { NewTaskComponent } from './new-task/new-task.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     TodoComponent,
-    TaskComponent
+    TaskComponent,
+    NewTaskComponent,
   ],
   imports: [
     BrowserModule,

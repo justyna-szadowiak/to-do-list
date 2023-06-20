@@ -1,19 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-3" style="height: 93vh; background: #FAFAFA;">
-      <div>
-        <mat-card class="mt-3">
-          <form [formGroup]="toDoForm">
-            <mat-form-field appearance="outline">
-              <mat-label>Task name</mat-label>
-              <input formControlName="item" matInput placeholder="Placeholder">
-              <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-            </mat-form-field>
-            <button *ngIf="!isEditEnable" mat-raised-button color="primary" class="btn-add-task" (click)="addTask()">Add</button>
-            <button *ngIf="isEditEnable" mat-raised-button color="primary" class="btn-update-task" (click)="updateTask()">Update</button>
-          </form>
-        </mat-card>
-      </div>
+      <app-new-task (newTask)="addOnClick($event)" ></app-new-task>
     </div>
     <div class="col-md-9">
       <div cdkDropListGroup>

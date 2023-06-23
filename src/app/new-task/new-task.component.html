@@ -3,12 +3,11 @@
     <form [formGroup]="toDoForm">
       <mat-form-field appearance="outline">
         <mat-label>Task name</mat-label>
-        <input formControlName="item" matInput placeholder="Placeholder">
+        <input formControlName="description" matInput placeholder="Placeholder">
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
       </mat-form-field>
       <button *ngIf="!isEditEnable" mat-raised-button color="primary" class="btn-add-task" (click)="addTask()">Add</button>
       <button *ngIf="isEditEnable" mat-raised-button color="primary" class="btn-update-task" (click)="updateTask()">Update</button>
-      <!-- <button *ngIf="isEditEnable" mat-icon-button color="warn" (click)="deleteTask(i)"><mat-icon>delete</mat-icon></button> -->
     </form>
   </mat-card>
 </div>

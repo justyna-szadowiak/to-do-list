@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { Task } from '../models/task';
+import { IdManagerService } from '../id-manager.service';
 
 @Component({
   selector: 'app-new-task',
@@ -9,43 +9,60 @@ import { Task } from '../models/task';
   styleUrls: ['./new-task.component.scss']
 })
 export class NewTaskComponent implements OnInit {
+  @Input() set editTask(value: Task | undefined) {
+    if (value) {
+      this.toDoForm = this.fb.group({
+        id: value.id,
+        title: value.title,
+        description: value.description,
+        done: value.done
+      })
+      this.isEditEnable = true;
+    }
+  };
   @Output() newTask = new EventEmitter<Task>();
-  @Output() updateExistingTask = new EventEmitter<string>();
+  @Output() updateExistingTask = new EventEmitter<Task>();
 
   toDoForm !: FormGroup;
   isEditEnable = false;
   updateId: any;
-  tasks!: Task[];
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog) {}
+  constructor(
+    private fb: FormBuilder,
+    private idManagerService: IdManagerService
+  ) {}
 
   ngOnInit(): void {
     this.toDoForm = this.fb.group({
-      id: [''],
+      id: [],
       title: [''],
-      item: ['', Validators.required]
+      description: ['', Validators.required],
+      done: [false]
     })
   }
 
-  updateTask() {
-    this.tasks[this.updateId].description = this.toDoForm.value.item;
-    this.tasks[this.updateId].done = false;
+  addTask() {
+    const task: Task = {
+      id: this.idManagerService.lastTaskId,
+      title: this.toDoForm.value.title,
+      description: this.toDoForm.value.description,
+      done: this.toDoForm.value.done
+    }
+
+    this.newTask.emit(task);
     this.toDoForm.reset();
-    this.updateId = undefined;
+    this.idManagerService.lastTaskId++;
+  }
+
+  updateTask() {
+    const task: Task = {
+      id: this.toDoForm.value.id,
+      title: this.toDoForm.value.title,
+      description: this.toDoForm.value.description,
+      done: this.toDoForm.value.done
+    }
+    this.updateExistingTask.emit(task);
+    this.toDoForm.reset();
     this.isEditEnable = false;
   }
-
-  addTask() {
-    this.newTask.emit({
-      id: this.toDoForm.value.id,
-      name: this.toDoForm.value.title,
-      description: this.toDoForm.value.item,
-      done: false
-    });
-    this.toDoForm.reset();
-  }
-
-  // updateTask(task: Task, index: number) {
-  //   const dialogRefUpdate = this.dialog.open()
-  // }
 }

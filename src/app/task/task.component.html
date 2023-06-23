@@ -1,1 +1,8 @@
-<p>task works!</p>
+<div class="box" cdkDrag>
+  <div class="btn-box">
+    {{task?.description}}
+    <button *ngIf="!isDone" mat-icon-button color="warn" (click)="emitToDelete()"><mat-icon>delete</mat-icon></button>
+    <button mat-icon-button color="primary" (click)="emitToEdit()"><mat-icon>edit</mat-icon></button>
+    <button *ngIf="isDone" mat-icon-button mat-accent color="primary"><mat-icon>check_circle</mat-icon></button>
+  </div>
+</div>

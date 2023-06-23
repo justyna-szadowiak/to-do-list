@@ -1,23 +1,20 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-3" style="height: 93vh; background: #FAFAFA;">
-      <app-new-task (newTask)="addOnClick($event)" ></app-new-task>
+      <app-new-task (newTask)="addOnClick($event)" (updateExistingTask)="updateTask($event)" [editTask]="currentEditTask"></app-new-task>
     </div>
     <div class="col-md-9">
       <div cdkDropListGroup>
         <div class="row">
           <div class="col-md-4 container">
-            <h2 class="header-title" style="text-transform: uppercase;">To do<span *ngIf="tasks.length > 0"> ({{tasks.length}})</span></h2>
-            <div
+            <h2 class="header-title" style="text-transform: uppercase;">To do<span *ngIf="toDo.length > 0"> ({{toDo.length}})</span></h2>
+            <div class="box"
               cdkDropList
-              [cdkDropListData]="tasks"
+              [cdkDropListData]="toDo"
               class="list"
               (cdkDropListDropped)="drop($event)">
-              <div class="box" *ngFor="let item of tasks; let i = index" cdkDrag>{{item.description}}
-                <div class="btn-box">
-                  <button mat-icon-button color="warn" (click)="deleteTask(i)"><mat-icon>delete</mat-icon></button>
-                  <button mat-icon-button color="primary" (click)="editTask(item, i)"><mat-icon>edit</mat-icon></button>
-                </div>
+              <div *ngFor="let currentTask of toDo; let i = index" cdkDrag>
+                <app-task [task]="currentTask" (deleteTask)="delete(currentTask.id)" (editTask)="edit($event)"></app-task>
               </div>
             </div>
           </div>
@@ -28,10 +25,8 @@
               [cdkDropListData]="inProgress"
               class="list"
               (cdkDropListDropped)="drop($event)">
-              <div class="box" *ngFor="let item of inProgress; let i = index" cdkDrag>{{item.description}}
-                <div class="btn-box">
-                  <button mat-icon-button color="warn" (click)="deleteTaskInProgress(i)"><mat-icon>delete</mat-icon></button>
-                </div>
+              <div *ngFor="let currentTask of inProgress; let i = index" cdkDrag>
+                <app-task [task]="currentTask" (deleteTask)="delete(currentTask.id)" (editTask)="edit($event)"></app-task>
               </div>
             </div>
           </div>
@@ -42,11 +37,8 @@
               [cdkDropListData]="done"
               class="list"
               (cdkDropListDropped)="drop($event)">
-              <div class="box" *ngFor="let item of done, let i = index" cdkDrag>{{item.description}}
-                <div class="btn-box">
-                  <button mat-icon-button color="warn" (click)="deleteDoneTask(i)"><mat-icon>delete</mat-icon></button>
-                  <button mat-icon-button mat-accent color="primary"><mat-icon>check_circle</mat-icon></button>
-                </div>
+              <div *ngFor="let currentTask of done; let i = index" cdkDrag>
+                <app-task [task]="currentTask" (deleteTask)="delete(currentTask.id)" (editTask)="edit($event)" [isDone]="true"></app-task>
               </div>
             </div>
           </div>

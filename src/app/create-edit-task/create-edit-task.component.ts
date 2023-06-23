@@ -4,11 +4,11 @@ import { Task } from '../models/task';
 import { IdManagerService } from '../id-manager.service';
 
 @Component({
-  selector: 'app-new-task',
-  templateUrl: './new-task.component.html',
-  styleUrls: ['./new-task.component.scss']
+  selector: 'app-create-edit-task',
+  templateUrl: './create-edit-task.component.html',
+  styleUrls: ['./create-edit-task.component.scss']
 })
-export class NewTaskComponent implements OnInit {
+export class CreateEditTaskComponent implements OnInit {
   @Input() set editTask(value: Task | undefined) {
     if (value) {
       this.toDoForm = this.fb.group({
@@ -20,7 +20,7 @@ export class NewTaskComponent implements OnInit {
       this.isEditEnable = true;
     }
   };
-  @Output() newTask = new EventEmitter<Task>();
+  @Output() createTask = new EventEmitter<Task>();
   @Output() updateExistingTask = new EventEmitter<Task>();
 
   toDoForm !: FormGroup;
@@ -41,7 +41,7 @@ export class NewTaskComponent implements OnInit {
     })
   }
 
-  addTask() {
+  create() {
     const task: Task = {
       id: this.idManagerService.lastTaskId,
       title: this.toDoForm.value.title,
@@ -49,7 +49,7 @@ export class NewTaskComponent implements OnInit {
       done: this.toDoForm.value.done
     }
 
-    this.newTask.emit(task);
+    this.createTask.emit(task);
     this.toDoForm.reset();
     this.idManagerService.lastTaskId++;
   }

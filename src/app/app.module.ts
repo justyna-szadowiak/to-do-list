@@ -15,7 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TodoComponent } from './todo/todo.component';
 import { TaskComponent } from './task/task.component';
-import { NewTaskComponent } from './new-task/new-task.component';
+import {CreateEditTaskComponent } from './create-edit-task/create-edit-task.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import { NewTaskComponent } from './new-task/new-task.component';
     NavbarComponent,
     TodoComponent,
     TaskComponent,
-    NewTaskComponent,
+    CreateEditTaskComponent,
   ],
   imports: [
     BrowserModule,

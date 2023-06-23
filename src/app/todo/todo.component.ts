@@ -30,11 +30,11 @@ export class TodoComponent implements OnInit {
     }
   }
 
-  addOnClick(task: Task) {
+  createTask(task: Task) {
     this.toDo.push(task);
   }
 
-  delete(taskId: number) {
+  deleteTask(taskId: number) {
     this.toDo.splice(taskId);
   }
 

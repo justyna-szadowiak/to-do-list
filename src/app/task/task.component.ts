@@ -9,7 +9,7 @@ import { Task } from '../models/task';
 export class TaskComponent implements OnInit {
   @Input() task?: Task;
   @Input() isDone: boolean = false;
-  @Output() deleteTask = new EventEmitter<void>();
+  @Output() delete = new EventEmitter<void>();
   @Output() editTask = new EventEmitter<Task>();
 
   constructor() { }
@@ -17,7 +17,7 @@ export class TaskComponent implements OnInit {
   ngOnInit(): void { }
 
   emitToDelete() {
-    this.deleteTask.emit();
+    this.delete.emit();
   }
 
   emitToEdit() {

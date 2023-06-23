@@ -6,7 +6,7 @@
         <input formControlName="description" matInput placeholder="Placeholder">
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
       </mat-form-field>
-      <button *ngIf="!isEditEnable" mat-raised-button color="primary" class="btn-add-task" (click)="addTask()">Add</button>
+      <button *ngIf="!isEditEnable" mat-raised-button color="primary" class="btn-add-task" (click)="create()">Add</button>
       <button *ngIf="isEditEnable" mat-raised-button color="primary" class="btn-update-task" (click)="updateTask()">Update</button>
     </form>
   </mat-card>
